@@ -1,0 +1,16 @@
+services:
+  wifi-audit-ts:
+    build: .
+    container_name: wifi_audit_ts
+    ports:
+      - "8080:8080"
+    privileged: true
+    network_mode: host
+    environment:
+      - WIFI_INTERFACE=wlan0
+      - WORDLIST_PATH=/usr/share/wordlists/rockyou.txt
+      - CAPTURE_DIR=/tmp/captures/
+    volumes:
+      - /usr/share/wordlists:/usr/share/wordlists:ro
+      - /tmp/captures:/tmp/captures
+    restart: unless-stopped
